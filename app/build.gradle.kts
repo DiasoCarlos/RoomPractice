@@ -12,7 +12,7 @@ android {
     defaultConfig {
         applicationId = "com.example.roomprueba"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 33
         versionCode = 1
         versionName = "1.0"
 
@@ -79,7 +79,11 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.6.0")
 
     //Room
-    implementation("androidx.room:room-ktx:2.6.1")
-    kapt("androidx.room:room-compiler:2.6.1")
+    implementation("androidx.room:room-ktx:2.5.0")
+    kapt("androidx.room:room-compiler:2.5.0")
+    implementation("androidx.room:room-runtime:2.5.0")
+
+    //Country code picker
+    implementation("com.github.JoelKanyi:KomposeCountryCodePicker:1.1.2")
 
 }
