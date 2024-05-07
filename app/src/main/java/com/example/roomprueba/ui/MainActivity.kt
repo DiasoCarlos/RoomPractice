@@ -27,6 +27,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.roomprueba.ui.nav.NavManager
 import com.example.roomprueba.ui.theme.RoomPruebaTheme
 import com.joelkanyi.jcomposecountrycodepicker.component.KomposeCountryCodePicker
 import com.joelkanyi.jcomposecountrycodepicker.component.rememberKomposeCountryCodePickerState
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    HomeScreen()
+                    NavManager()
                 }
             }
         }
@@ -53,7 +54,8 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun HomeScreen(
-    viewModel : MainViewModel = hiltViewModel()
+    viewModel : MainViewModel = hiltViewModel(),
+    navigateToText : (String,String,String,String) -> Unit
 ) {
     val beneficiarios by viewModel.beneficiarios.collectAsState(initial = emptyList())
 
@@ -96,13 +98,15 @@ fun HomeScreen(
             }
         )
 
+        OTPTextField()
+
         if (state.phoneNumber.isNotEmpty()){
             Text(text = state.getFullPhoneNumber())
         }
 
         LazyColumn(
             modifier = Modifier
-                .fillMaxSize()
+                .fillMaxWidth()
                 .padding(all = 16.dp)
         ) {
             items(beneficiarios) { item ->
@@ -117,6 +121,10 @@ fun HomeScreen(
                     Spacer(Modifier.height(12.dp))
                 }
             }
+        }
+        
+        Button(onClick = { navigateToText("Carlos","Toral","500",state.getFullPhoneNumber()) }) {
+            Text(text = "TEST")
         }
     }
 }
