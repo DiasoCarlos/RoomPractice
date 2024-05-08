@@ -1,5 +1,8 @@
-package com.example.roomprueba.ui
+package com.example.roomprueba.ui.home
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.roomprueba.domain.model.Beneficiario
@@ -15,6 +18,21 @@ class MainViewModel @Inject constructor(
 ) : ViewModel(){
 
     val beneficiarios = repository.getBeneficiariosFromRoom()
+
+    var state by mutableStateOf(HomeState())
+        private set
+
+    fun onEvent(event : HomeEvents){
+
+        when(event){
+            is HomeEvents.NumberChange -> {
+                state = state.copy(
+                    number = event.number
+                )
+            }
+        }
+
+    }
 
     fun addBeneficiario(){
 

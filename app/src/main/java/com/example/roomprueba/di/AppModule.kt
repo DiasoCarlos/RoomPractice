@@ -6,7 +6,12 @@ import com.example.roomprueba.data.local.BeneficiarioDao
 import com.example.roomprueba.data.local.BeneficiarioDatabase
 import com.example.roomprueba.data.repository.BeneficiarioRepositoryImpl
 import com.example.roomprueba.core.Constants.Companion.BENEFICIARIO_TABLE
+import com.example.roomprueba.core.Constants.Companion.USER_TABLE
+import com.example.roomprueba.data.local.UserDao
+import com.example.roomprueba.data.local.UserDatabase
+import com.example.roomprueba.data.repository.UserRepoImpl
 import com.example.roomprueba.domain.repository.BeneficiarioRepository
+import com.example.roomprueba.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,6 +23,45 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    //DATABASE USERS
+
+    @Provides
+    @Singleton
+    fun provideUserDatabase(
+        @ApplicationContext context: Context
+    ) : UserDatabase{
+
+        return Room.databaseBuilder(
+            context,
+            UserDatabase::class.java,
+            USER_TABLE
+        ).build()
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserDao(
+        userDatabase: UserDatabase
+    ) : UserDao {
+
+        return userDatabase.UserDao()
+
+    }
+
+    @Provides
+    @Singleton
+    fun provideUserRepo(
+        userDao: UserDao
+    ) : UserRepository{
+
+        return UserRepoImpl(
+            userDao = userDao
+        )
+
+    }
+
+    //DATABASE BENEFICIARIOS
     @Provides
     @Singleton
     fun provideAppDatabase(@ApplicationContext appContext : Context) : BeneficiarioDatabase {
@@ -32,7 +76,7 @@ object AppModule {
     @Singleton
     fun provideDao(beneficiarioDatabase : BeneficiarioDatabase) : BeneficiarioDao {
 
-        return beneficiarioDatabase.beneticiarioDao()
+        return beneficiarioDatabase.BeneticiarioDao()
 
     }
 

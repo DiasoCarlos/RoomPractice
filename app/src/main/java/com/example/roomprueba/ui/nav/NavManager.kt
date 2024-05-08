@@ -6,8 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.roomprueba.ui.HomeScreen
-import com.example.roomprueba.ui.TestScren
+import com.example.roomprueba.ui.home.HomeScreen
+import com.example.roomprueba.ui.test.TestScren
 
 @Composable
 fun NavManager() {
@@ -53,6 +53,5 @@ fun NavManager() {
         }
 
     }
-
 
 }

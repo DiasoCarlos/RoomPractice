@@ -1,4 +1,4 @@
-package com.example.roomprueba.ui
+package com.example.roomprueba.ui.home
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -22,11 +22,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import com.example.roomprueba.ui.components.OTPTextField
 import com.example.roomprueba.ui.nav.NavManager
 import com.example.roomprueba.ui.theme.RoomPruebaTheme
 import com.joelkanyi.jcomposecountrycodepicker.component.KomposeCountryCodePicker
@@ -58,6 +58,8 @@ fun HomeScreen(
     navigateToText : (String,String,String,String) -> Unit
 ) {
     val beneficiarios by viewModel.beneficiarios.collectAsState(initial = emptyList())
+
+    val homeState = viewModel.state
 
     val state = rememberKomposeCountryCodePickerState(
         showCountryCode = true,

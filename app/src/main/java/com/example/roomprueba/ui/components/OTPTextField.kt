@@ -1,4 +1,4 @@
-package com.example.roomprueba.ui
+package com.example.roomprueba.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
