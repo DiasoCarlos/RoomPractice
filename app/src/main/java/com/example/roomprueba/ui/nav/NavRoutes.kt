@@ -9,4 +9,8 @@ sealed class NavRoutes(val route : String) {
         }
     }
 
+    object Login:NavRoutes("Login")
+
+    object SignUp:NavRoutes("SignUp")
+
 }

@@ -7,6 +7,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.roomprueba.ui.home.HomeScreen
+import com.example.roomprueba.ui.login.LoginScreen
+import com.example.roomprueba.ui.signup.SignupScreen
 import com.example.roomprueba.ui.test.TestScren
 
 @Composable
@@ -16,7 +18,7 @@ fun NavManager() {
 
     NavHost(
         navController = navController,
-        startDestination = NavRoutes.Home.route
+        startDestination = NavRoutes.Login.route
     ) {
 
         composable(
@@ -50,6 +52,25 @@ fun NavManager() {
                 telefono = it.arguments?.getString("telefono") ?: ""
             )
 
+        }
+        
+        composable(
+            route = NavRoutes.Login.route
+        ){
+            LoginScreen(
+                onSignUpClick = { /*TODO*/ },
+                onRegisterClick = {
+                    navController.navigate(NavRoutes.SignUp.route)
+                }
+            )
+        }
+
+        composable(
+            route = NavRoutes.SignUp.route
+        ){
+            SignupScreen {
+                navController.navigate(NavRoutes.Login.route)
+            }
         }
 
     }
